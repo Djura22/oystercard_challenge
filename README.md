@@ -35,6 +35,11 @@ class Oystercard
   	@balance = 0  
   end  
 end  
+``
+In order to keep using public transport
+As a customer
+I want to add money to my card
+``  
 
 * Next up was to enable a way that the customer can top-up their oystercard. to start this I created a new test to check that any given Oystercard could respond to a 'top_up' method with a single argument (being the amount they wish to top up!)
 
