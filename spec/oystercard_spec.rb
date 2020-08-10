@@ -6,7 +6,7 @@ describe OysterCard do
 # I want money on my card
 
 # Checking new card has 0 balance
-  it 'Balance of new card as zero' do
+  it 'Balance of new card is zero' do
   	expect(subject.balance).to eq(0)
   end
 # Checking that a new card instance can talk to a top-up method with a sgl arg.
@@ -18,7 +18,14 @@ describe OysterCard do
   	  card.top_up(100)
   	  expect(card.balance).to eq 100
     end
+
+    it 'receives input balance correctly' do
+    	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1
+    end
+
+
   end
+
 
 end
 
