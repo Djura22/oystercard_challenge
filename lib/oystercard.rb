@@ -7,13 +7,17 @@ class OysterCard
 # initializing a balance on the new card. Set at 0
   def initialize
   	@balance = 0
-  	@limit = LIMIT
+  	#@limit = LIMIT
   end
 # method for topping up the owners card balance
   def top_up(amount)
-  	fail 'Balance limit of #{full_balance} reached, try smaller amount' if @balance + amount > LIMIT
+  	fail "Balance limit of #{LIMIT} reached, try smaller amount" if @balance + amount > LIMIT
   	@balance += amount
   end
+
+
+
+
 
 
 	
