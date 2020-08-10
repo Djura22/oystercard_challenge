@@ -19,7 +19,9 @@ describe OysterCard do
     end
 
     it 'Balance should not exceed 90' do
-    	expect { subject.balance > 90 }.to raise_error "Balance is full"
+    	full_balance = OysterCard::LIMIT
+    	subject.top_up(full_balance) 
+    	expect { subject.top_up 1 }.to raise_error 'Balance limit of #{full_balance} reached, try smaller amount'
     end
 
 

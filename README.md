@@ -86,9 +86,29 @@ it 'receives input balance correctly' do
 In order to protect my money
 As a customer
 I don't want to put too much money on my card
-`` 
+``
 
+* This user story is asking me to ensure that there is a limit to how much the customer can top_up. I can set a limit for each card which will prevent the customer from accidently topping up vast quantities of money.
 
+it 'Balance should not exceed 90' do  
+    	full_balance = OysterCard::LIMIT  
+    	subject.top_up(full_balance)   
+    	expect { subject.top_up 1 }.to raise_error 'Balance limit reached'  
+    end  
+
+ * The above test assumes a balance limit in the form of a CONST: LIMIT. I then set the balance to the LIMIT and attempt to top up by 1, expecting an error to be raised 'Balance limit reached'
+
+ class OysterCard  
+	LIMIT = 90  
+
+* Limit constant set.
+
+  def top_up(amount)  
+  	fail 'Balance limit reached' if @balance + amount > LIMIT  
+  	@balance += amount  
+  end  
+
+* Top_up method updated to include fail if balance exceeds the new limit.
 
 
 
