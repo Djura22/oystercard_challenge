@@ -13,7 +13,7 @@ describe OysterCard do
 
   describe 'top_up' do
 
-    it 'receives input balance correctly' do
+    it 'top up to update balance of Oyster' do
     	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1
     end
 
@@ -26,7 +26,10 @@ describe OysterCard do
 
   describe 'deduct' do
 
-  	it ''
+  	it 'deduct from balance' do
+  		expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
+  	end
+
 
 
   end

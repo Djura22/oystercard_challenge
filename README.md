@@ -110,5 +110,12 @@ it 'Balance should not exceed 90' do
 
 * Top_up method updated to include fail if balance exceeds the new limit.
 
+### No.4
+
+``
+In order to pay for my journey
+As a customer
+I need my fare deducted from my card
+``
 
 
