@@ -18,6 +18,10 @@ describe OysterCard do
     	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1
     end
 
+    it 'Balance should not exceed 90' do
+    	expect { subject.balance > 90 }.to raise_error "Balance is full"
+    end
+
 
   end
 

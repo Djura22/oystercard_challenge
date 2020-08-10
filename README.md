@@ -35,6 +35,9 @@ class Oystercard
   	@balance = 0  
   end  
 end  
+
+### No.2
+
 ``
 In order to keep using public transport
 As a customer
@@ -77,6 +80,13 @@ it 'receives input balance correctly' do
     	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1  
     end  
 
+### No.3
+
+``
+In order to protect my money
+As a customer
+I don't want to put too much money on my card
+`` 
 
 
 
