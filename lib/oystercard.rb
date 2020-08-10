@@ -16,7 +16,7 @@ class OysterCard
   end
 
   def deduct(amount)
-  	
+  	fail "Time to top up! Balance: 0" if @balance == 0
     @balance -= amount
   end
 

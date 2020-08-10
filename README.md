@@ -25,8 +25,6 @@ describe Oystercard do
 
 * In Ruby I then created an Oystercard class within a new file 'oystercard.rb'. From there I defined a method 'balance' containing 0 to comply with my test. It was green from here so I then refactored my code in order that each new card could be provided with a balance. I did this using attr_reader :balance as a replacement for the method and initialized each new card with a balance of 0.
 
-
-
 class Oystercard
 
   attr_reader :balance
@@ -118,4 +116,50 @@ As a customer
 I need my fare deducted from my card
 ``
 
+* Here I'm doing much of the same as with the top_up method, but for deducting money from the card.
+
+it { is_expected.to respond_to(:deduct).with(1).argument }  
+
+* I start with this simple test to check the card and method are on speaking terms. It's safe to assume the 1 argument.
+
+def deduct(amount)
+end
+
+* Method made to pass the test.
+
+describe 'deduct' do  
+
+  	it 'deduct from balance' do  
+  	  subject.top_up(1)  
+  		expect{ subject.deduct 1 }.to change{ subject.balance }.by -1  
+  	end  
+
+* Again, a very similiar test to one for top_up, checking it's primary function is working.
+
+def deduct(amount)  
+    @balance -= amount  
+  end
+
+it 'prevents use of card at 0 balance' do  
+  		card = OysterCard.new  
+  		subject.top_up(1)  
+  		expect { card.deduct 1 }.to raise_error "Time to top up! Balance: 0"  
+  	end  
+  end  
+
+* This last test is to ensure no spending of imaginary funds!
+* The method thus far:
+
+def deduct(amount)  
+  	fail "Time to top up! Balance: 0" if balance == 0  
+    @balance -= amount  
+  end  
+
+### No.5
+
+``
+In order to get through the barriers.
+As a customer
+I need to touch in and out.
+``
 

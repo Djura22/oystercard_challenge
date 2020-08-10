@@ -27,11 +27,15 @@ describe OysterCard do
   describe 'deduct' do
 
   	it 'deduct from balance' do
+  	  subject.top_up(1)
   		expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
   	end
 
-
-
+  	it 'prevents use of card at 0 balance' do
+  		card = OysterCard.new
+  		subject.top_up(1)
+  		expect { card.deduct 1 }.to raise_error "Time to top up! Balance: 0"
+  	end
   end
 
 
