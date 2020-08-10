@@ -8,9 +8,9 @@
 ### No.1
 
 ``
-In order to use public transport
-As a customer
-I want money on my card
+In order to use public transport  
+As a customer  
+I want money on my card  
 ``
 
 * To start things off here, I described an Oystercard class in my spec file and check for a new instance to have a balance of 0. Requiring the file to read the code.

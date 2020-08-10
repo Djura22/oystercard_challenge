@@ -13,11 +13,6 @@ describe OysterCard do
   it { is_expected.to respond_to(:top_up).with(1).argument }
 
   describe 'top_up' do
-  	it 'receives input balance correctly' do	
-  	  card = OysterCard.new
-  	  card.top_up(100)
-  	  expect(card.balance).to eq 100
-    end
 
     it 'receives input balance correctly' do
     	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1
