@@ -62,7 +62,17 @@ def top_up(amount)
   	@balance = @balance + amount  
   end  
 
-* It was now then to refactor these sections to smarten them up a bit.
+* It was then time to refactor these sections to smarten them up a bit. Firstly a simple refactor of my new method.
+
+@balance += amount  
+
+* Then the test, using '.to change' now to really condense things down.
+
+it 'receives input balance correctly' do  
+    	expect{ subject.top_up 1 }.to change{ subject.balance }.by 1  
+    end  
+
+
 
 
 
