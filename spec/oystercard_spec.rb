@@ -2,17 +2,14 @@ require 'Oystercard'
 
 describe Oystercard do
 
-  it "Expect oystercard to respond to balance method" do
-    expect(subject).to respond_to(:balance)
-  end
-
   it "Expects balance to be zero" do
     oystercard = Oystercard.new
     expect(oystercard.balance).to eq (0)
   end
 
-  it "Expect oystercard to respond to top_up method" do
-    expect(subject).to respond_to(:top_up)
+  it "expects journey is empty by default" do
+    oystercard = Oystercard.new
+    expect(oystercard.journey).to eq []
   end
 
   it "Expect oystercard to respond to top_up method with an amount" do
@@ -69,6 +66,8 @@ describe Oystercard do
       subject.touch_in(station)
       expect{ subject.touch_out }.to change{ subject.in_journey }.to false
     end
+
+
 
     context 'balance is reduced by MIN_BALANCE on touch_out' do
       before do
