@@ -4,6 +4,7 @@ class Journey
 
 	attr_accessor :entry_station
 	attr_accessor :exit_station
+	attr_accessor :journey
 
 	MIN_FARE = 1
 	PENALTY_FARE = 6
@@ -23,11 +24,12 @@ class Journey
 
 	def finish_journey(station)
     @exit_station = station
+    @journey = { entry_station: @entry_station, exit_station: @exit_station }
   end
 
 
 	def fare
-		if @entry_station && @exit_station
+		if journey_complete?
 		  MIN_FARE
 		else
 			PENALTY_FARE
@@ -35,12 +37,10 @@ class Journey
 	end
 
 
-	def journey_complete
-    @journey
+	def journey_complete?
+    @entry_station && @exit_station
 	end
 
 
 end
-
-# @journey = { entry_station: @entry_station, exit_station: @exit_station }	
 

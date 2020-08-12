@@ -17,11 +17,16 @@ describe Journey do
   	expect(subject).to respond_to(:fare)
   end
 
-  it 'responds to method' do
-  	expect(subject).to respond_to(:journey_complete)
+  describe 'journey_complete?' do
+
+  	let(:station) { double :station }
+
+    it 'Journey is complete' do
+  	  subject.start_journey(station)
+  	  subject.finish_journey(station)
+  	  expect(subject).to be_journey_complete
+    end
   end
-
-
 
   describe 'start_journey' do
 
