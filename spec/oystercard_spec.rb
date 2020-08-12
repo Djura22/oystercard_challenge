@@ -48,41 +48,43 @@ describe Oystercard do
       it 'change status of oystercard in_journey? = true' do
         expect{ subject.touch_in(station) }.to change{ subject.in_journey }.to true
       end
-    end
-
-      it "Expects an error for touching in if balance is less than £1" do
-        expect{ subject.touch_in(station) }.to raise_error "You need to top up"
-      end
 
       it "Stores the entry station" do
-        subject.top_up(Oystercard::MAX_BALANCE)
         subject.touch_in(station)
         expect(subject.entry_station).to eq station
       end
+    end
+
+    it "Expects an error for touching in if balance is less than £1" do
+        expect{ subject.touch_in(station) }.to raise_error "You need to top up"
+      end
+
   end
 
   describe '#touch_out' do
 
     let(:station){ double :station }
-
-    it 'change status of oystercard in_journey? = false' do
-      subject.top_up(Oystercard::MAX_BALANCE)
-      subject.touch_in(station)
-      expect{ subject.touch_out(station) }.to change{ subject.in_journey }.to false
-    end
-
-
-
+    
     context 'balance is reduced by MIN_BALANCE on touch_out' do
       before do
         subject.top_up(Oystercard::MAX_BALANCE)
       end
 
+      it 'change status of oystercard in_journey? = false' do
+        subject.touch_in(station)
+        expect{ subject.touch_out(station) }.to change{ subject.in_journey }.to false
+      end
+
       it 'reduces balance by MIN_BALANCE' do
         expect{ subject.touch_out(station) }.to change{ subject.balance }.by -1
       end
-    end
 
+      it "Stores the exit station" do
+        subject.touch_out(station)
+        expect(subject.exit_station).to eq station
+      end
+
+    end
 
   end
 
