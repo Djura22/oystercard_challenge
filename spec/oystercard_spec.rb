@@ -7,9 +7,8 @@ describe Oystercard do
     expect(oystercard.balance).to eq (0)
   end
 
-  it "expects journey is empty by default" do
-    oystercard = Oystercard.new
-    expect(oystercard.journey).to eq []
+  it 'has an empty list of journeys by default' do
+  expect(subject.journey_list).to be_empty
   end
 
   it "Expect oystercard to respond to top_up method with an amount" do
@@ -20,7 +19,7 @@ describe Oystercard do
     expect(subject).to respond_to(:touch_in).with(1).argument
   end
 
-  it "Expect oystercard to respond to touch_in method with an argument" do
+  it "Expect oystercard to respond to touch_out method with an argument" do
     expect(subject).to respond_to(:touch_out).with(1).argument
   end
 
@@ -63,8 +62,9 @@ describe Oystercard do
 
   describe '#touch_out' do
 
-    let(:station){ double :station }
-    
+    let(:station) { double :station }
+    let(:journey){ {entry_station: station, exit_station: station} } 
+
     context 'balance is reduced by MIN_BALANCE on touch_out' do
       before do
         subject.top_up(Oystercard::MAX_BALANCE)
@@ -84,6 +84,13 @@ describe Oystercard do
         expect(subject.exit_station).to eq station
       end
 
+      it 'touching in and out adds a journey to the list array' do
+        subject.touch_in(station)
+        subject.touch_out(station)
+        p "Journey list below"
+        p subject.journey_list
+        expect(subject.journey_list).to include journey
+      end
     end
 
   end
@@ -97,7 +104,5 @@ describe Oystercard do
       expect(subject.in_journey).to eq false
     end
   end
-
-
 
 end
