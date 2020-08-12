@@ -35,13 +35,6 @@ describe Oystercard do
     end
   end
 
-  #describe "#deduct" do
-  #  it "Expext balance to decrease by deduct amount" do
-  #    amount = 10
-  #    expect{ subject.deduct amount }.to change{ subject.balance }.by -10
-  #  end
-  #end
-
   describe '#touch_in' do
 
     let(:station){ double :station }
@@ -91,7 +84,8 @@ describe Oystercard do
   end
 
   describe '#in_journey' do
-    it "Expect in_journey to equal to false" do
+    it "Expect in_journey to equal false" do
+      subject.touch_out
       expect(subject.in_journey).to eq false
     end
   end
