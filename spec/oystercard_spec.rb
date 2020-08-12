@@ -20,6 +20,10 @@ describe Oystercard do
     expect(subject).to respond_to(:touch_in).with(1).argument
   end
 
+  it "Expect oystercard to respond to touch_in method with an argument" do
+    expect(subject).to respond_to(:touch_out).with(1).argument
+  end
+
   describe "#top_up" do
     it "Expects balance to increase by top up amount" do
       amount = 10
@@ -59,12 +63,12 @@ describe Oystercard do
 
   describe '#touch_out' do
 
-  let(:station){ double :station }
+    let(:station){ double :station }
 
     it 'change status of oystercard in_journey? = false' do
       subject.top_up(Oystercard::MAX_BALANCE)
       subject.touch_in(station)
-      expect{ subject.touch_out }.to change{ subject.in_journey }.to false
+      expect{ subject.touch_out(station) }.to change{ subject.in_journey }.to false
     end
 
 
@@ -75,7 +79,7 @@ describe Oystercard do
       end
 
       it 'reduces balance by MIN_BALANCE' do
-        expect{ subject.touch_out }.to change{ subject.balance }.by -1
+        expect{ subject.touch_out(station) }.to change{ subject.balance }.by -1
       end
     end
 
@@ -83,8 +87,11 @@ describe Oystercard do
   end
 
   describe '#in_journey' do
+
+    let(:station){ double :station }
+    
     it "Expect in_journey to equal false" do
-      subject.touch_out
+      subject.touch_out(station)
       expect(subject.in_journey).to eq false
     end
   end
