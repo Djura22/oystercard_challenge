@@ -38,6 +38,5 @@ describe OysterCard do
   	end
   end
 
-
 end
 
