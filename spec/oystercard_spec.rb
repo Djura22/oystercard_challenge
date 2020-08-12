@@ -1,4 +1,4 @@
-require 'Oystercard'
+require 'oystercard'
 
 describe Oystercard do
 
@@ -48,16 +48,12 @@ describe Oystercard do
         expect{ subject.touch_in(station) }.to change{ subject.in_journey }.to true
       end
 
-      it "Stores the entry station" do
-        subject.touch_in(station)
-        expect(subject.entry_station).to eq station
-      end
     end
 
     it "Expects an error for touching in if balance is less than £1" do
-        expect{ subject.touch_in(station) }.to raise_error "You need to top up"
-      end
-
+      expect{ subject.touch_in(station) }.to raise_error "You need to top up"
+    end
+    
   end
 
   describe '#touch_out' do
