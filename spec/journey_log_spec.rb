@@ -1,4 +1,6 @@
 require 'journey_log'
+require 'oystercard'
+require 'journey'
 
 describe JourneyLog do
 
@@ -15,15 +17,21 @@ describe JourneyLog do
   end
 
   it 'responds to method' do
-  	expect(subject).to respond_to(:journey_list)
+  	expect(subject).to respond_to(:journeys)
   end
 
   it 'responds to method' do
-  	expect(subject).to respond_to(:log_current)
+  	expect(subject).to respond_to(:log)
   end
 
+  describe 'log_current' do
 
+    let(:station) { double :station }
 
+  	it 'journeys array contains start and end stations' do
+  		expect(subject.log).to eq subject.journeys
+  	end
 
+  end
 	
-end
+end 

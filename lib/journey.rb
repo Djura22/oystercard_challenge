@@ -25,7 +25,7 @@ class Journey
 	def finish_journey(exit_station)
     @exit_station = exit_station
     @current_log.end = exit_station
-    #@journey = { entry_station: @entry_station, exit_station: @exit_station }
+    @current_log.log
   end
 
 	def fare
