@@ -1,6 +1,11 @@
 require 'journey'
 
 describe Journey do
+
+  let(:station) { double :station, :station_zone => 1 }
+  let(:station2) { double :station2, :station_zone => 3 }
+
+
   it 'Journey is an instance of the class' do
   	expect(subject).to be_instance_of Journey
   end
@@ -11,8 +16,6 @@ describe Journey do
   end
 
   describe 'start_journey' do
-
-    let(:station) { double :station }
 
   	it "Stores the entry station" do
       subject.start_journey(station)
@@ -26,8 +29,6 @@ describe Journey do
   end
 
   describe 'finish_journey' do
-
-  	let(:station) { double :station }
 
   	it "Stores the exit station" do
       subject.finish_journey(station)
@@ -43,8 +44,6 @@ describe Journey do
 
   describe 'fare' do
 
-  	let(:station) { double :station }
-
   	it 'charges minimum fare if both entry and exit are logged' do
   		subject.start_journey(station)
   		subject.finish_journey(station)
@@ -55,11 +54,15 @@ describe Journey do
   		expect(subject.fare).to eq Journey::PENALTY_FARE
   	end
 
+    it 'charges for zone entries' do
+      subject.start_journey(station)
+      subject.finish_journey(station2)
+      expect(subject.fare).to eq 3
+    end
+
   end
 
   describe 'journey_complete?' do
-
-    let(:station) { double :station }
 
     it 'Journey is complete' do
       subject.start_journey(station)

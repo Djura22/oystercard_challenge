@@ -23,7 +23,6 @@ attr_reader :journeys
   end
 
 
-
   private
 
   def store_journey
@@ -31,17 +30,4 @@ attr_reader :journeys
     @current_journey.current = nil
   end
 
-
-  def journeys
-    @journeys.dup
-  end
-
-
-  #def current_journey(journey)
-  #	if journey[:entry_station] == nil
-  #	  journey[:entry_station] = "Incomplete Journey"
-  #	elsif journey[:exit_station] == nil
-  #	  journey[:exit_station] = "Incomplete Journey"
-  # end
-  #end
 end

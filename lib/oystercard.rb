@@ -11,7 +11,7 @@ class Oystercard
 
   def initialize
     @balance = 0
-    #@journey_list = []
+    @penalty = 0
     @journey_log = JourneyLog.new
   end
 
@@ -22,13 +22,15 @@ class Oystercard
 
   def touch_in(entry_station)
     fail "You need to top up" if @balance < MIN_BALANCE
+    deduct(@journey_log.current_journey.fare) if @penalty == 1
+    @penalty = 1
     @journey_log.start(entry_station)
   end
 
   def touch_out(exit_station)
+    @penalty = 0
     @journey_log.end(exit_station)
     deduct(@journey_log.current_journey.fare)
-    #store_journey
   end
 
   private
