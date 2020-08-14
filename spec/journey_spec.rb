@@ -5,27 +5,9 @@ describe Journey do
   	expect(subject).to be_instance_of Journey
   end
 
-  it 'responds to method' do
-  	expect(subject).to respond_to(:start_journey)
-  end
-  
-  it 'responds to method' do
-  	expect(subject).to respond_to(:finish_journey)
-  end
 
   it 'responds to method' do
-  	expect(subject).to respond_to(:fare)
-  end
-
-  describe 'journey_complete?' do
-
-  	let(:station) { double :station }
-
-    it 'Journey is complete' do
-  	  subject.start_journey(station)
-  	  subject.finish_journey(station)
-  	  expect(subject).to be_journey_complete
-    end
+    expect(subject).to respond_to(:start_journey).with(1).argument
   end
 
   describe 'start_journey' do
@@ -39,6 +21,9 @@ describe Journey do
   end
 
 
+  it 'responds to method' do
+    expect(subject).to respond_to(:finish_journey).with(1).argument
+  end
 
   describe 'finish_journey' do
 
@@ -51,6 +36,10 @@ describe Journey do
 
   end
 
+
+  it 'responds to method' do
+    expect(subject).to respond_to(:fare)
+  end
 
   describe 'fare' do
 
@@ -66,6 +55,17 @@ describe Journey do
   		expect(subject.fare).to eq Journey::PENALTY_FARE
   	end
 
+  end
+
+  describe 'journey_complete?' do
+
+    let(:station) { double :station }
+
+    it 'Journey is complete' do
+      subject.start_journey(station)
+      subject.finish_journey(station)
+      expect(subject).to be_journey_complete
+    end
   end
 
 

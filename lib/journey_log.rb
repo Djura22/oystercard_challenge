@@ -27,10 +27,14 @@ attr_reader :journeys
   private
 
   def store_journey
-    @journeys.push(@current_journey.journey)
-    @current_journey.journey = nil
+    @journeys.push(@current_journey.current)
+    @current_journey.current = nil
   end
 
+
+  def journeys
+    @journeys.dup
+  end
 
 
   #def current_journey(journey)

@@ -23,7 +23,7 @@ class Journey
 
 	def finish_journey(exit_station)
     @exit_station = exit_station
-    @current << { :entry_station => @start, :exit_station => @end }
+    @current = { :entry_station => @entry_station, :exit_station => @exit_station }
     self
     end
 
