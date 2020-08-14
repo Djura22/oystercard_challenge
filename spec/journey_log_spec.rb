@@ -1,6 +1,4 @@
 require 'journey_log'
-require 'oystercard'
-require 'journey'
 
 describe JourneyLog do
 
@@ -11,6 +9,17 @@ describe JourneyLog do
   it 'responds to method' do
   	expect(subject).to respond_to(:start)
   end
+
+  describe '#start' do
+
+    let(:station) { double :station }
+    let(:journey){ {entry_station: station, exit_station: station} } 
+
+    it 'creates entry_station' do
+      subject.start(station)
+      expect(subject.current_journey.entry_station).to eq station
+    end
+  end
   
   it 'responds to method' do
   	expect(subject).to respond_to(:end)
@@ -18,10 +27,6 @@ describe JourneyLog do
 
   it 'responds to method' do
   	expect(subject).to respond_to(:journeys)
-  end
-
-  it 'responds to method' do
-  	expect(subject).to respond_to(:log)
   end
 
   describe 'log_current' do

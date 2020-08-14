@@ -3,19 +3,41 @@ require_relative 'journey'
 
 class JourneyLog
 
-attr_accessor :start, :end
+attr_accessor :current_journey
 attr_reader :journeys
 
-	def initialize#(journey_class = nil)
-		#@journey_class = journey_class
+	def initialize#(journey_class = Journey)
+		@current_journey = Journey.new
 		@journeys = []
-		@start
-		@end
 
 	end
-  
-  def log
-  	@journeys << { :entry_station => @start, :exit_station => @end }
+
+
+  def start(entry_station)
+    @current_journey.start_journey(entry_station)
   end
 
+  def end(exit_station)
+    @current_journey.finish_journey(exit_station)
+    store_journey
+  end
+
+
+
+  private
+
+  def store_journey
+    @journeys.push(@current_journey.journey)
+    @current_journey.journey = nil
+  end
+
+
+
+  #def current_journey(journey)
+  #	if journey[:entry_station] == nil
+  #	  journey[:entry_station] = "Incomplete Journey"
+  #	elsif journey[:exit_station] == nil
+  #	  journey[:exit_station] = "Incomplete Journey"
+  # end
+  #end
 end

@@ -1,38 +1,37 @@
 #require 'station'
-require_relative 'journey_log'
-require_relative 'oystercard'
+#require_relative 'journey_log'
+#require_relative 'oystercard'
 
 class Journey
 
-	attr_accessor :entry_station, :exit_station, :journey, :current_log
+	attr_accessor :entry_station, :exit_station, :current
 
 	MIN_FARE = 1
 	PENALTY_FARE = 6
 
-	def initialize(entry_station = nil)
-	  @entry_station = entry_station
+	def initialize
+	  @entry_station = nil
 	  @exit_station = nil
-	  @current_log = JourneyLog.new
+	  @current = nil
 	end
 
 
 	def start_journey(entry_station)
     @entry_station = entry_station
-    @current_log.start = entry_station
 	end
 
 
 	def finish_journey(exit_station)
     @exit_station = exit_station
-    @current_log.end = exit_station
-    @current_log.log
-  end
+    @current << { :entry_station => @start, :exit_station => @end }
+    self
+    end
 
 	def fare
 		if journey_complete?
 		  MIN_FARE
 		else
-			PENALTY_FARE
+		  PENALTY_FARE
 		end
 	end
 
